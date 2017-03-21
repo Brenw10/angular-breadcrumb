@@ -242,6 +242,10 @@ function BreadcrumbDirective($interpolate, $breadcrumb, $rootScope) {
                         if (step.ncyBreadcrumb && step.ncyBreadcrumb.label) {
                             var parseLabel = $interpolate(step.ncyBreadcrumb.label);
                             step.ncyBreadcrumbLabel = parseLabel(viewScope);
+                            if(step.ncyBreadcrumb.id) {
+                                var parseId = $interpolate(step.ncyBreadcrumb.id);
+                                step.ncyBreadcrumbId = parseId(viewScope);
+                            }
                             // Watcher for further viewScope updates
                             registerWatchers(labelWatchers, parseLabel, viewScope, step);
                         } else {
@@ -299,6 +303,10 @@ function BreadcrumbLastDirective($interpolate, $breadcrumb, $rootScope) {
                             if (lastStep.ncyBreadcrumb && lastStep.ncyBreadcrumb.label) {
                                 var parseLabel = $interpolate(lastStep.ncyBreadcrumb.label);
                                 scope.ncyBreadcrumbLabel = parseLabel(viewScope);
+                                if(lastStep.ncyBreadcrumb.id) {
+                                    var parseId = $interpolate(lastStep.ncyBreadcrumb.id);
+                                    scope.ncyBreadcrumbId = parseId(viewScope);
+                                }
                                 // Watcher for further viewScope updates
                                 // Tricky last arg: the last step is the entire scope of the directive !
                                 registerWatchers(labelWatchers, parseLabel, viewScope, scope);
@@ -366,6 +374,10 @@ function BreadcrumbTextDirective($interpolate, $breadcrumb, $rootScope) {
                             if (step.ncyBreadcrumb && step.ncyBreadcrumb.label) {
                                 var parseLabel = $interpolate(step.ncyBreadcrumb.label);
                                 combinedLabels.push(parseLabel(viewScope));
+                                if(step.ncyBreadcrumb.id) {
+                                    var parseId = $interpolate(step.ncyBreadcrumb.id);
+                                    combinedLabels.push(parseId(viewScope));
+                                }
                                 // Watcher for further viewScope updates
                                 registerWatchersText(labelWatchers, parseLabel, viewScope);
                             } else {
